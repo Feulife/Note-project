@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 const noteSchema = mongoose.Schema({
-  titele: {
+  title: {
     type: String,
     require: true,
   },
@@ -14,11 +14,11 @@ const noteSchema = mongoose.Schema({
   },
   createdAt: {
     type: Date,
-    default: new Date(),
+    default: true,
   },
   updatedAt: {
     type: Date,
-    default: new Date(),
+    default: true,
   },
 });
 

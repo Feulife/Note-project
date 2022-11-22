@@ -1,7 +1,7 @@
 import { FETCH_ALL, CREATE, UPDATE, DELETE } from "../constants/constants.js";
 
 export default (notes = [], action) => {
-  switch (axction.type) {
+  switch (action.type) {
     case FETCH_ALL:
       return action.payload;
     case CREATE:
