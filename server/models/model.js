@@ -20,7 +20,11 @@ const noteSchema = mongoose.Schema({
     type: Date,
     default: true,
   },
+  dateCreate: {
+    type: String,
+    require: true,
+  },
 });
 
-const Note = mongoose.model('Note', noteSchema);
+const Note = mongoose.model("Note", noteSchema);
 export default Note;

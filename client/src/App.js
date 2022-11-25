@@ -7,6 +7,7 @@ import {
   deleteNote,
   updateNote,
   createNote,
+  showDateTime,
 } from "./actions/action.js";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
     published: "",
     createdAt: "",
     updatedAt: "",
+    dateCreate: "",
   });
   const [currentId, setCurrentId] = useState(0);
 
@@ -40,7 +42,7 @@ function App() {
 
   const clear = () => {
     setCurrentId(0);
-    setNoteData({ title: "", description: "", published: "", createdAt: "", updatedAt: "" });
+    setNoteData({ title: "", description: "", published: "", createdAt: "", updatedAt: "", dateCreate: "" });
   };
 
   const handleSubmit = async (e) => {
@@ -77,6 +79,7 @@ function App() {
                         setNoteData({
                           ...noteData,
                           title: e.target.value,
+                          dateCreate: showDateTime,
                         })
                       }
                     />
@@ -141,7 +144,7 @@ function App() {
                       <td>{index + 1}</td>
                       <td>{note?.title}</td>
                       <td>{note?.description}</td>
-                      <td>{note?.published} Date: {note.createdAt}</td>
+                      <td>{note?.published} {note.dateCreate}</td>
                       <td>
                         <div className="d-grid gap-2">
                           <Button
