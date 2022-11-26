@@ -37,4 +37,4 @@ export const deleteNote = (id) => async (dispatch) => {
   }
 };
 
-export const showDateTime = new Date().toLocaleString();
+export const showDateTime = new Date().toLocaleDateString();

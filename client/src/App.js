@@ -15,7 +15,6 @@ function App() {
   const [noteData, setNoteData] = useState({
     title: "",
     description: "",
-    published: "",
     createdAt: "",
     updatedAt: "",
     dateCreate: "",
@@ -42,7 +41,7 @@ function App() {
 
   const clear = () => {
     setCurrentId(0);
-    setNoteData({ title: "", description: "", published: "", createdAt: "", updatedAt: "", dateCreate: "" });
+    setNoteData({ title: "", description: "", createdAt: "", updatedAt: "", dateCreate: "" });
   };
 
   const handleSubmit = async (e) => {
@@ -79,7 +78,7 @@ function App() {
                         setNoteData({
                           ...noteData,
                           title: e.target.value,
-                          dateCreate: showDateTime,
+                          // dateCreate: showDateTime,
                         })
                       }
                     />
@@ -99,7 +98,7 @@ function App() {
                       }
                     />
                   </Form.Group>
-                  <Form.Group className="mb-3" controlId="formGroupPublish">
+                  {/* <Form.Group className="mb-3" controlId="formGroupPublish">
                     <Form.Label>Publish</Form.Label>
                     <Form.Control
                       name="published"
@@ -113,9 +112,12 @@ function App() {
                         })
                       }
                     />
-                  </Form.Group>
+                  </Form.Group> */}
                   <div className="d-grid gap-2">
-                    <Button variant="success" size="lg" type="submit">
+                    <Button variant="success" size="lg" type="submit" onClick={() =>  setNoteData({
+                          ...noteData,
+                          dateCreate: showDateTime,
+                        })}>
                       Save
                     </Button>
                     <Button variant="secondary" size="lg" onClick={clear}>
@@ -144,7 +146,7 @@ function App() {
                       <td>{index + 1}</td>
                       <td>{note?.title}</td>
                       <td>{note?.description}</td>
-                      <td>{note?.published} {note.dateCreate}</td>
+                      <td>{note.dateCreate}</td>
                       <td>
                         <div className="d-grid gap-2">
                           <Button
