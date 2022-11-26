@@ -1,5 +1,6 @@
 import "./App.css";
 import { Row, Col, Table, Button, Card, Form } from "react-bootstrap";
+import ToggleButton from "react-bootstrap/ToggleButton";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -7,6 +8,7 @@ import {
   deleteNote,
   updateNote,
   createNote,
+  likeNote,
   showDateTime,
 } from "./actions/action.js";
 
@@ -41,7 +43,14 @@ function App() {
 
   const clear = () => {
     setCurrentId(0);
-    setNoteData({ title: "", description: "", createdAt: "", updatedAt: "", dateCreate: "" });
+    setNoteData({
+      title: "",
+      description: "",
+      createdAt: "",
+      updatedAt: "",
+      dateCreate: "",
+      like: "",
+    });
   };
 
   const handleSubmit = async (e) => {
@@ -54,6 +63,8 @@ function App() {
       clear();
     }
   };
+  
+  const [checked, setChecked] = useState(false);
 
   return (
     <div className="App">
@@ -78,7 +89,6 @@ function App() {
                         setNoteData({
                           ...noteData,
                           title: e.target.value,
-                          // dateCreate: showDateTime,
                         })
                       }
                     />
@@ -98,26 +108,18 @@ function App() {
                       }
                     />
                   </Form.Group>
-                  {/* <Form.Group className="mb-3" controlId="formGroupPublish">
-                    <Form.Label>Publish</Form.Label>
-                    <Form.Control
-                      name="published"
-                      type="text"
-                      placeholder="Enter Publish"
-                      value={noteData.published}
-                      onChange={(e) =>
+                  <div className="d-grid gap-2">
+                    <Button
+                      variant="success"
+                      size="lg"
+                      type="submit"
+                      onClick={() =>
                         setNoteData({
                           ...noteData,
-                          published: e.target.value,
+                          dateCreate: showDateTime,
                         })
                       }
-                    />
-                  </Form.Group> */}
-                  <div className="d-grid gap-2">
-                    <Button variant="success" size="lg" type="submit" onClick={() =>  setNoteData({
-                          ...noteData,
-                          dateCreate: showDateTime,
-                        })}>
+                    >
                       Save
                     </Button>
                     <Button variant="secondary" size="lg" onClick={clear}>
@@ -149,6 +151,19 @@ function App() {
                       <td>{note.dateCreate}</td>
                       <td>
                         <div className="d-grid gap-2">
+                          <ToggleButton
+                            className="mb-2"
+                            id="toggle-check"
+                            type="checkbox"
+                            variant="outline-primary"
+                            checked={checked}
+                            value="1"
+                            onChange={(e) => setChecked(e.currentTarget.checked)
+                              // dispatch(likeNote(note._id))
+                            }
+                          >
+                            Like
+                          </ToggleButton>
                           <Button
                             variant="outline-warning"
                             size="lg"

@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE } from "../constants/constants.js";
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from "../constants/constants.js";
 
 export default (notes = [], action) => {
   switch (action.type) {
@@ -10,6 +10,8 @@ export default (notes = [], action) => {
       return notes.map((note) => (note._id === action.payload._id ? action.payload : note));
     case DELETE:
       return notes.filter((note) => note._id !== action.payload);
+    case LIKE:
+      return notes.map((note) => (note._id === action.payload._id ? action.payload : note));
     default:
       return notes;
   }

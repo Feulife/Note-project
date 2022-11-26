@@ -1,4 +1,4 @@
-import { FETCH_ALL, CREATE, UPDATE, DELETE } from "../constants/constants.js";
+import { FETCH_ALL, CREATE, UPDATE, DELETE, LIKE } from "../constants/constants.js";
 import * as api from "../api/index.js";
 
 export const getNotes = () => async (dispatch) => {
@@ -27,6 +27,15 @@ export const updateNote = (id, Note) => async (dispatch) => {
     console.log(error.message);
   }
 };
+
+export const likeNote = (id, Note) => async (dispatch) => {
+  try {
+    const { data } = await api.likeNote(id, Note);
+    dispatch({ type: LIKE, payload: data });
+  } catch (error) {
+    console.log(error.message);
+  }
+}
 
 export const deleteNote = (id) => async (dispatch) => {
   try {
