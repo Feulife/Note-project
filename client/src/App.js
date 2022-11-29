@@ -1,6 +1,5 @@
 import "./App.css";
 import { Row, Col, Table, Button, Card, Form } from "react-bootstrap";
-import ToggleButton from "react-bootstrap/ToggleButton";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -63,9 +62,14 @@ function App() {
       clear();
     }
   };
-  
-  const [checked, setChecked] = useState(false);
 
+  // const handleLikeIt = async (e) => {
+  //   e.preventDefault();
+  //   if (likeId === 0) {
+  //     dispatch()
+  //   }
+  // }
+  
   return (
     <div className="App">
       <div className="section" style={{ margin: "20px" }}>
@@ -138,6 +142,7 @@ function App() {
                   <th>Title</th>
                   <th>Description</th>
                   <th>Published</th>
+                  <th>Like</th>
                   <th>Actions</th>
                 </tr>
               </thead>
@@ -149,24 +154,23 @@ function App() {
                       <td>{note?.title}</td>
                       <td>{note?.description}</td>
                       <td>{note.dateCreate}</td>
+                      <td>{note.like}</td>
                       <td>
                         <div className="d-grid gap-2">
-                          <ToggleButton
-                            className="mb-2"
-                            id="toggle-check"
-                            type="checkbox"
-                            variant="outline-primary"
-                            checked={checked}
-                            value="1"
-                            onChange={(e) => setChecked(e.currentTarget.checked)
-                              // dispatch(likeNote(note._id))
-                            }
-                          >
+                          <Button
+                            variant="outline-info"
+                            size="sm"
+                            style={{ margin: "1%" }}
+                            onClick={() => (setNoteData({
+                              ...noteData,
+                              like: "Like",
+                            }))}
+                          >                            
                             Like
-                          </ToggleButton>
+                          </Button>
                           <Button
                             variant="outline-warning"
-                            size="lg"
+                            size="sm"
                             style={{ margin: "1%" }}
                             onClick={() => setCurrentId(note._id)}
                           >
@@ -174,7 +178,7 @@ function App() {
                           </Button>
                           <Button
                             variant="outline-danger"
-                            size="lg"
+                            size="sm"
                             style={{ margin: "1%" }}
                             onClick={() => dispatch(deleteNote(note._id))}
                           >

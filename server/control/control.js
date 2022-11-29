@@ -41,13 +41,13 @@ export const getNote = async (req, res) => {
 
 export const updateNote = async (req, res) => {
   const { id } = req.params;
-  const { title, description, published } = req.body;
+  const { title, description, dateCreate } = req.body;
   try {
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return res.status(404).send(`No Note with id: ${id}`);
     }
 
-    const updateNote = { title, description, published, _id: id };
+    const updateNote = { title, description, dateCreate, _id: id };
     await Note.findByIdAndUpdate(id, updateNote, { new: true });
 
     res.status(200);
@@ -70,5 +70,24 @@ export const deleteNote = async (req, res) => {
   } catch (error) {
     res.status(404);
     res.json({ "message": error.message});
+  }
+}
+
+export const likeNote = async (req, res) => {
+  const { id } = req.params;
+  const { like } = req.body;
+  try {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).send(`No Note with id: ${id}`);
+    }
+
+    const likeNote = { like, _id: id };
+    await Note.findByIdAndUpdate(id, likeNote, { new: true });
+
+    res.status(200);
+    res.json(likeNote);
+  } catch (error) {
+    res.status(404);
+    res.json({ "message": error.message });
   }
 }
