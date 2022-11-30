@@ -21,7 +21,7 @@ const noteSchema = mongoose.Schema({
     default: true,
   },
   like: {
-    type: String,
+    type: Boolean,
     require: true,
   },
 });

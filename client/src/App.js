@@ -19,8 +19,11 @@ function App() {
     createdAt: "",
     updatedAt: "",
     dateCreate: "",
+    like: false,
   });
+
   const [currentId, setCurrentId] = useState(0);
+  const [likeId, setLikeId] = useState(false);
 
   useEffect(() => {
     try {
@@ -48,7 +51,7 @@ function App() {
       createdAt: "",
       updatedAt: "",
       dateCreate: "",
-      like: "",
+      like: false,
     });
   };
 
@@ -63,12 +66,16 @@ function App() {
     }
   };
 
-  // const handleLikeIt = async (e) => {
-  //   e.preventDefault();
-  //   if (likeId === 0) {
-  //     dispatch()
-  //   }
-  // }
+  const handleLikeIt = async () => {
+    
+    if (likeId) {
+      dispatch(likeNote(currentId, setLikeId(false)))
+    } else {
+      if (!likeId) {
+        dispatch(likeNote(currentId, setLikeId(true)))
+      }
+    }
+  }
   
   return (
     <div className="App">
@@ -154,7 +161,7 @@ function App() {
                       <td>{note?.title}</td>
                       <td>{note?.description}</td>
                       <td>{note.dateCreate}</td>
-                      <td>{note.like}</td>
+                      <td>{ note.like ? 'Like' : 'Not like'}</td>
                       <td>
                         <div className="d-grid gap-2">
                           <Button
@@ -163,7 +170,7 @@ function App() {
                             style={{ margin: "1%" }}
                             onClick={() => (setNoteData({
                               ...noteData,
-                              like: "Like",
+                              like: handleLikeIt,
                             }))}
                           >                            
                             Like
