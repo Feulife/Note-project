@@ -12,7 +12,9 @@ export default (notes = [], action) => {
       return notes.filter((note) => note._id !== action.payload);
     case LIKE:
       return notes.map((note) => (note._id === action.payload._id ? action.payload : note));
+
     default:
       return notes;
   }
 };
+

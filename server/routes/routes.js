@@ -7,6 +7,6 @@ router.post('/', createNote);
 router.get('/:id', getNote);
 router.patch('/:id', updateNote);
 router.delete('/:id', deleteNote);
-router.patch('/:id', likeNote);
+router.post('/:id', likeNote);
 
 export default router;

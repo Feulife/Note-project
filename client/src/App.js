@@ -23,8 +23,7 @@ function App() {
   });
 
   const [currentId, setCurrentId] = useState(0);
-  const [likeId, setLikeId] = useState(false);
-
+ 
   useEffect(() => {
     try {
       dispatch(getNotes());
@@ -47,9 +46,7 @@ function App() {
     setCurrentId(0);
     setNoteData({
       title: "",
-      description: "",
-      createdAt: "",
-      updatedAt: "",
+      description: "",      
       dateCreate: "",
       like: false,
     });
@@ -65,24 +62,13 @@ function App() {
       clear();
     }
   };
-
-  const handleLikeIt = async () => {
-    
-    if (likeId) {
-      dispatch(likeNote(currentId, setLikeId(false)))
-    } else {
-      if (!likeId) {
-        dispatch(likeNote(currentId, setLikeId(true)))
-      }
-    }
-  }
-  
+ 
   return (
     <div className="App">
       <div className="section" style={{ margin: "20px" }}>
         <Row>
           <Col md={4}>
-            <Card>
+            <Card bg="light">
               <Card.Body>
                 <Card.Title>NOTE Form</Card.Title>
                 <Card.Subtitle className="mb-2 text-muted">
@@ -142,7 +128,7 @@ function App() {
             </Card>
           </Col>
           <Col md={8}>
-            <Table>
+            <Table striped bordered hover variant="dark">
               <thead>
                 <tr>
                   <th>#</th>
@@ -161,20 +147,25 @@ function App() {
                       <td>{note?.title}</td>
                       <td>{note?.description}</td>
                       <td>{note.dateCreate}</td>
-                      <td>{ note.like ? 'Like' : 'Not like'}</td>
+                      <td>{note?.like ? "I like it" : "I dislike it"}</td>
                       <td>
                         <div className="d-grid gap-2">
                           <Button
                             variant="outline-info"
                             size="sm"
-                            style={{ margin: "1%" }}
-                            onClick={() => (setNoteData({
-                              ...noteData,
-                              like: handleLikeIt,
-                            }))}
-                          >                            
-                            Like
-                          </Button>
+                            style={{ margin: "1%" }}                            
+                            onClick={() => {                              
+                              dispatch(likeNote(note._id, {
+                                title: note.title,
+                                description: note.description,
+                                dateCreate: note.dateCreate,
+                                like: !note.like,
+                              })
+                              );
+                            }}
+                          >
+                            {note?.like ? "Not Like" : "like"}
+                          </Button>                  
                           <Button
                             variant="outline-warning"
                             size="sm"

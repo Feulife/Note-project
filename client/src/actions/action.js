@@ -30,8 +30,9 @@ export const updateNote = (id, Note) => async (dispatch) => {
 
 export const likeNote = (id, Note) => async (dispatch) => {
   try {
-     await api.likeNote(id, Note);
-    dispatch({ type: LIKE, payload: Boolean });
+     const { data } = await api.likeNote(id, Note);
+     console.log(data); 
+    dispatch({ type: LIKE, payload: data });
   } catch (error) {
     console.log(error.message);
   }
