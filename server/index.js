@@ -12,7 +12,7 @@ import { MongoClient } from "mongodb";
 const app = express();
 app.use(bodyParser.json({ limit: "30mb", extended: true }));
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }));
-app.use(cors());
+app.use(cors({ origin: ['https://note-project-one.vercel.app/'] }));
 app.use("/note", noteRoutes);
 
 const client = new MongoClient(Db, {
