@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://note-project-backend.vercel.app"
+  baseURL: "https://note-project-backend.vercel.app"
 })
 
 export const fetchNotes = () => API.get(`/note`);
